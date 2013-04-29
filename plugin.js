@@ -43,7 +43,7 @@ CKEDITOR.dialog.add('editMetaDataDialog', function(editor)
                     },
                     {
                         type:  'text',
-                        id:    'url',
+                        id:    'link',
                         label: 'URL'
                     },
                     {
@@ -65,19 +65,19 @@ CKEDITOR.dialog.add('editMetaDataDialog', function(editor)
                 [
                     {
                         type:    'text',
-                        id:      'title',
+                        id:      'meta_title',
                         label:   'Title',
                         validate: CKEDITOR.dialog.validate.notEmpty('The page must have a valid title.'),
                         required: true
                     },
                     {
                         type:  'textarea',
-                        id:    'description',
+                        id:    'meta_description',
                         label: 'Description'
                     },
                     {
                         type:  'textarea',
-                        id:    'keywords',
+                        id:    'meta_keywords',
                         label: 'Keywords'
                     }
                 ]
@@ -85,11 +85,11 @@ CKEDITOR.dialog.add('editMetaDataDialog', function(editor)
         ],
         onOk: function () {
             var dia = this;
-            $.each(['name','url','enabled'], function(i, name) {
+            $.each(['name','link','enabled'], function(i, name) {
                 $('input[name="'+name+'"]').val(dia.getValueOf('general',  name));
                 $('.ckeditor_info .'+name+' span').html( dia.getValueOf('general', name));
             });
-            $.each(['title','description','keywords'], function(i, name) {
+            $.each(['meta_title','meta_description','meta_keywords'], function(i, name) {
                 $('input[name="'+name+'"]').val(dia.getValueOf('metadata',  name));
                 $('.ckeditor_info .'+name+' span').html( dia.getValueOf('metadata', name));
             });
@@ -103,10 +103,10 @@ CKEDITOR.dialog.add('editMetaDataDialog', function(editor)
         },
         onShow: function () {
             var dia = this;
-            $.each(['name','url','enabled'], function(i, name) {
+            $.each(['name','link','enabled'], function(i, name) {
                 dia.setValueOf('general',  name, $('input[name="'+name+'"]').val());
             });
-            $.each(['title','description','keywords'], function(i, name) {
+            $.each(['meta_title','meta_description','meta_keywords'], function(i, name) {
                 dia.setValueOf('metadata',  name, $('input[name="'+name+'"]').val());
             });
             if (CKEDITOR_TAB) {
